@@ -21,6 +21,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: initialRoute,
       onGenerateRoute: mainRoutes,
+      theme: ThemeData(
+          primaryColor: Colors.green,
+          accentColor: Colors.white,
+          primarySwatch: Colors.deepOrange),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

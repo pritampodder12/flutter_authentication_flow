@@ -9,10 +9,7 @@ Route<dynamic> mainRoutes(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => LoginPage());
       break;
     case RouterNames.HOME:
-      return MaterialPageRoute(
-          builder: (context) => MyHomePage(
-                title: 'Test authentication flow',
-              ));
+      return MaterialPageRoute(builder: (context) => HomePage());
       break;
     default:
       return null;

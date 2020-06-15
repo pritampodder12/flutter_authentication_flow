@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "510120255009",
+    "firebase_url": "https://flutterpractice-49abc.firebaseio.com",
+    "project_id": "flutterpractice-49abc",
+    "storage_bucket": "flutterpractice-49abc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510120255009:android:d0ad6a5a4da83157e3cd60",
+        "android_client_info": {
+          "package_name": "com.example.case_study"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510120255009-68qit5ckn39oob5fmklfha2l4b0qjiqi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.case_study",
+            "certificate_hash": "25dc794e2e08196b2631f1dcf695b61733d33002"
+          }
+        },
+        {
+          "client_id": "510120255009-sflarpqvdnd002e7ehm8rrk7orltaqsq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMYJ1Tmnx1lAjJqVOIdmES7O3QfTXiBEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510120255009-sflarpqvdnd002e7ehm8rrk7orltaqsq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

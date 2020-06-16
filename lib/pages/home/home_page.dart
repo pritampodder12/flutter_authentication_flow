@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage>
                   backgroundColor: Color(0xffFDCF09),
                   child: CircleAvatar(
                     radius: 30,
+                    backgroundColor: Colors.grey[400],
                     backgroundImage: AssetImage(ImageNames.myImage),
                   ),
                 )),

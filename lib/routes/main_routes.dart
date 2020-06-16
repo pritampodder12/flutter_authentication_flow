@@ -11,6 +11,9 @@ Route<dynamic> mainRoutes(RouteSettings settings) {
     case RouterNames.HOME:
       return MaterialPageRoute(builder: (context) => HomePage());
       break;
+    case RouterNames.TEST:
+      return MaterialPageRoute(builder: (context) => TestPage());
+      break;
     default:
       return null;
   }

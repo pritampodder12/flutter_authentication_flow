@@ -1,3 +1,4 @@
+import 'package:case_study/constants/image_names.dart';
 import 'package:case_study/constants/router_names.dart';
 import 'package:flutter/material.dart';
 
@@ -40,8 +41,29 @@ class _HomePageState extends State<HomePage>
         ],
       ),
       body: Container(
-        child: Center(
-          child: IconButton(
+        width: double.infinity,
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: Hero(
+                tag: "DemoTag",
+                child: CircleAvatar(
+                  radius: 35,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                    radius: 30,
+                    backgroundImage: AssetImage(ImageNames.myImage),
+                  ),
+                )),
+          ),
+          RaisedButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(RouterNames.TEST);
+            },
+            child: Text('Navigate'),
+          ),
+          IconButton(
             iconSize: 50,
             icon: AnimatedIcon(
               icon: AnimatedIcons.play_pause,
@@ -49,7 +71,7 @@ class _HomePageState extends State<HomePage>
             ),
             onPressed: () => _handleOnPressed(),
           ),
-        ),
+        ]),
       ),
     );
   }

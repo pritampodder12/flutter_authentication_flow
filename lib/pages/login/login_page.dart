@@ -1,5 +1,5 @@
 import 'package:case_study/pages/login/components/social_media_icon.dart';
-import 'package:case_study/pages/login/components/textInput.dart';
+import 'package:case_study/pages/login/components/authInput.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -73,9 +73,7 @@ class _LoginPageState extends State<LoginPage> {
         body: Container(
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () {
-              FocusScope.of(context).requestFocus(new FocusNode());
-            },
+            onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
             child: Form(
               key: formKey,
               child: ListView(
@@ -87,13 +85,13 @@ class _LoginPageState extends State<LoginPage> {
                           fontSize: 30, color: Theme.of(context).primaryColor)),
                   Divider(color: Theme.of(context).primaryColor, thickness: 1),
                   SizedBox(height: 40),
-                  TextInput(
+                  AuthInput(
                     type: 'email',
                     label: 'Email',
                     placeholder: 'Enter Email',
                   ),
                   SizedBox(height: 20),
-                  TextInput(
+                  AuthInput(
                     type: 'password',
                     label: 'Password',
                     placeholder: 'Enter Password',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import './constants/router_names.dart';
@@ -22,9 +23,13 @@ class MyApp extends StatelessWidget {
       initialRoute: initialRoute,
       onGenerateRoute: mainRoutes,
       theme: ThemeData(
-          primaryColor: Colors.green,
-          accentColor: Colors.white,
-          primarySwatch: Colors.deepOrange),
+        primaryColor: Colors.green,
+        accentColor: Colors.white,
+        primarySwatch: Colors.deepOrange,
+        textTheme: GoogleFonts.nunitoTextTheme(
+          Theme.of(context).textTheme,
+        ),
+      ),
       debugShowCheckedModeBanner: false,
     );
   }

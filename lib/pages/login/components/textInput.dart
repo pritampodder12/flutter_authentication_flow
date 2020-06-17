@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 
-class TextInput extends StatelessWidget {
+import '../../../mixins/validation_mixin.dart';
+
+class TextInput extends StatelessWidget with ValidationMixin {
   final String type;
   final String label;
   final String placeholder;
   final bool obscureText;
   TextInput({this.type, this.label, this.placeholder, this.obscureText});
-
-  final Function(String) emailValidator = (String value) {
-    if (!value.contains('@')) return 'Please enter valid email id';
-  };
-
-  final Function(String) passwordValidator = (String value) {
-    if (value.length < 3) return 'Password must atleast 4 character';
-  };
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onEditingComplete: () {
+        print('editing complete');
+      },
       cursorColor: Theme.of(context).primaryColor,
       keyboardType:
           type == 'email' ? TextInputType.emailAddress : TextInputType.text,
-      textInputAction: TextInputAction.next,
+      textInputAction:
+          type == 'email' ? TextInputAction.next : TextInputAction.done,
+      onFieldSubmitted: (_) =>
+          type == 'email' ? FocusScope.of(context).nextFocus() : null,
       decoration: InputDecoration(
           helperText: '',
           focusedBorder: OutlineInputBorder(

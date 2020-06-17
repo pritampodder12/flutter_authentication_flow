@@ -67,9 +67,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.lime[300],
-        resizeToAvoidBottomInset: false,
         body: Container(
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
@@ -78,45 +78,42 @@ class _LoginPageState extends State<LoginPage> {
             },
             child: Form(
               key: formKey,
-              child: Padding(
+              child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Log In',
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: Theme.of(context).primaryColor)),
-                    SizedBox(height: 40),
-                    TextInput(
-                      type: 'email',
-                      label: 'Email',
-                      placeholder: 'Enter Email',
-                    ),
-                    SizedBox(height: 20),
-                    TextInput(
-                      type: 'password',
-                      label: 'Password',
-                      placeholder: 'Enter Password',
-                    ),
-                    SizedBox(height: 40),
-                    RaisedButton(
-                      color: Theme.of(context).primaryColor,
-                      onPressed: _handleSubmit,
-                      child: Text('Log In',
-                          style:
-                              TextStyle(color: Theme.of(context).accentColor)),
-                    ),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SocialMediaIcon(iconName: ImageNames.googleLogo),
-                        SocialMediaIcon(iconName: ImageNames.facebookLogo)
-                      ],
-                    )
-                  ],
-                ),
+                children: [
+                  SizedBox(height: screenSize.height * 0.2),
+                  Text('Log In',
+                      style: TextStyle(
+                          fontSize: 30, color: Theme.of(context).primaryColor)),
+                  Divider(color: Theme.of(context).primaryColor, thickness: 1),
+                  SizedBox(height: 40),
+                  TextInput(
+                    type: 'email',
+                    label: 'Email',
+                    placeholder: 'Enter Email',
+                  ),
+                  SizedBox(height: 20),
+                  TextInput(
+                    type: 'password',
+                    label: 'Password',
+                    placeholder: 'Enter Password',
+                  ),
+                  SizedBox(height: 40),
+                  RaisedButton(
+                    color: Theme.of(context).primaryColor,
+                    onPressed: _handleSubmit,
+                    child: Text('Log In',
+                        style: TextStyle(color: Theme.of(context).accentColor)),
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SocialMediaIcon(iconName: ImageNames.googleLogo),
+                      SocialMediaIcon(iconName: ImageNames.facebookLogo)
+                    ],
+                  )
+                ],
               ),
             ),
           ),

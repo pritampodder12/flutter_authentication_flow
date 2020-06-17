@@ -15,9 +15,8 @@ class SocialMediaIcon extends StatelessWidget {
       },
       icon: SvgPicture.asset(
         iconName,
-        semanticsLabel: 'Acme Logo',
-        height: 30,
-        width: 30,
+        height: 40,
+        width: 40,
       ),
     );
   }

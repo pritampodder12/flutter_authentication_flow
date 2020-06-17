@@ -55,10 +55,12 @@ class _LoginPageState extends State<LoginPage> {
 
   //   print("User Sign Out");
   // }
-  final formKey = GlobalKey<FormState>();
-
+  final _formKey = GlobalKey<FormState>();
+  final _emailFocusNode = FocusNode();
+  final _passwordFocusNode = FocusNode();
+  // bool _enableBtn = false;
   _handleSubmit() {
-    if (formKey.currentState.validate())
+    if (_formKey.currentState.validate())
       Navigator.pushReplacementNamed(context, RouterNames.HOME);
 
     // SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -75,7 +77,9 @@ class _LoginPageState extends State<LoginPage> {
             behavior: HitTestBehavior.opaque,
             onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
             child: Form(
-              key: formKey,
+              key: _formKey,
+              // onChanged: () =>
+              //     setState(() => _enableBtn = _formKey.currentState.validate()),
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 children: [
@@ -89,16 +93,20 @@ class _LoginPageState extends State<LoginPage> {
                     type: 'email',
                     label: 'Email',
                     placeholder: 'Enter Email',
+                    focusNode: _emailFocusNode,
+                    nextFocusNode: _passwordFocusNode,
                   ),
                   SizedBox(height: 20),
                   AuthInput(
                     type: 'password',
                     label: 'Password',
                     placeholder: 'Enter Password',
+                    focusNode: _passwordFocusNode,
                   ),
                   SizedBox(height: 40),
                   RaisedButton(
                     color: Theme.of(context).primaryColor,
+                    disabledColor: Colors.green,
                     onPressed: _handleSubmit,
                     child: Text('Log In',
                         style: TextStyle(color: Theme.of(context).accentColor)),

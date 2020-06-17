@@ -39,22 +39,10 @@ class _AuthInputState extends State<AuthInput> with ValidationMixin {
             : TextInputType.text,
         focusNode: widget.focusNode,
         decoration: InputDecoration(
-          helperText: '',
-          focusedBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Theme.of(context).primaryColor, width: 1.0),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Color.fromRGBO(101, 106, 54, 1), width: 1.0),
-          ),
-          errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red[400], width: 1.0)),
-          focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red[400], width: 1.0)),
-          hintText: widget.placeholder,
-          labelText: widget.label,
-        ),
+            border: OutlineInputBorder(),
+            helperText: '',
+            hintText: widget.placeholder,
+            labelText: widget.label),
         validator: widget.type == 'email'
             ? emailValidator
             : widget.type == 'password' ? passwordValidator : null,

@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                   AuthInput(
                     type: 'email',
                     label: 'Email',
-                    placeholder: 'Enter Email',
+                    placeholder: 'e.g. john@company.com',
                     focusNode: _emailFocusNode,
                     nextFocusNode: _passwordFocusNode,
                   ),
@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                   AuthInput(
                     type: 'password',
                     label: 'Password',
-                    placeholder: 'Enter Password',
+                    placeholder: 'e.g. abc@1234',
                     focusNode: _passwordFocusNode,
                   ),
                   SizedBox(height: 40),

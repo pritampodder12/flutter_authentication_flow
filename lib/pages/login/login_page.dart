@@ -15,10 +15,17 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordFocusNode = FocusNode();
   bool _autoValidate = false;
   bool _isLoading = false;
-  Map<String, String> _loginData = {
-    'email': '',
-    'password': '',
+  final _formData = <String, Map<String, dynamic>>{
+    'email': {
+      ...{'value': ''},
+      ...{'isValid': false},
+    },
+    'password': {
+      ...{'value': ''},
+      ...{'isValid': false},
+    },
   };
+
   _handleSubmit() async {
     if (_formKey.currentState.validate()) {
       FocusScope.of(context).unfocus();
@@ -26,7 +33,6 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         _isLoading = true;
       });
-      print(_loginData);
       await Future.delayed(Duration(seconds: 2),
           () => Navigator.pushReplacementNamed(context, RouterNames.HOME));
     } else
@@ -40,6 +46,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    //formData.forEach((k, v) => print(v['value']));
+    print(_formData);
     return Scaffold(
         backgroundColor: Colors.lime[300],
         body: SafeArea(
@@ -71,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                       label: 'Email',
                       name: 'email',
                       isLoading: _isLoading,
-                      data: _loginData,
+                      data: _formData,
                       nextFocusNode: _passwordFocusNode,
                     ),
                     SizedBox(height: 20),
@@ -79,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                       type: 'password',
                       label: 'Password',
                       name: 'password',
-                      data: _loginData,
+                      data: _formData,
                       isLoading: _isLoading,
                       focusNode: _passwordFocusNode,
                     ),
@@ -87,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                     RaisedButton(
                       color: Theme.of(context).primaryColor,
                       onPressed: _isLoading ? null : _handleSubmit,
-                      child: Text(_isLoading ? 'Please wait.....' : 'Log In',
+                      child: Text(_isLoading ? 'Loging in.....' : 'Log In',
                           style:
                               TextStyle(color: Theme.of(context).accentColor)),
                     ),

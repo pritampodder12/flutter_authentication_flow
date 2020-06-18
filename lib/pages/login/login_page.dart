@@ -13,27 +13,32 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _passwordFocusNode = FocusNode();
-  bool _autoValidate = false;
-  bool _isLoading = true;
-  final _formData = <String, String>{
-    'email': '',
-    'password': '',
+  bool _isLoading = false;
+  bool _formIsValid = false;
+  final _formData = <String, Map<String, dynamic>>{
+    'email': {'value': '', 'isValid': false},
+    'password': {'value': '', 'isValid': false},
   };
 
+  _handleChange() {
+    _formKey.currentState.save();
+    bool valid = true;
+    _formData.forEach((key, value) {
+      if (!value['isValid']) valid = false;
+    });
+    setState(() {
+      _formIsValid = valid;
+    });
+  }
+
   _handleSubmit() async {
-    if (_formKey.currentState.validate()) {
-      FocusScope.of(context).unfocus();
-      _formKey.currentState.save();
-      print(_formData);
-      setState(() {
-        _isLoading = true;
-      });
-      await Future.delayed(Duration(seconds: 2),
-          () => Navigator.pushReplacementNamed(context, RouterNames.HOME));
-    } else
-      setState(() {
-        _autoValidate = true;
-      });
+    FocusScope.of(context).unfocus();
+    _formKey.currentState.save();
+    setState(() {
+      _isLoading = true;
+    });
+    await Future.delayed(Duration(seconds: 2),
+        () => Navigator.pushReplacementNamed(context, RouterNames.HOME));
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // prefs.setBool('loggedIn', true);
   }
@@ -55,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               Form(
                 key: _formKey,
-                autovalidate: _autoValidate,
+                onChanged: _handleChange,
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   children: [
@@ -71,6 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                       type: 'email',
                       label: 'Email',
                       name: 'email',
+                      placeholder: 'e.g. company@example.com',
                       isLoading: _isLoading,
                       data: _formData,
                       nextFocusNode: _passwordFocusNode,
@@ -80,6 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                       type: 'password',
                       label: 'Password',
                       name: 'password',
+                      placeholder: 'e.g. abc@123',
                       data: _formData,
                       isLoading: _isLoading,
                       focusNode: _passwordFocusNode,
@@ -87,7 +94,9 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 40),
                     RaisedButton(
                       color: Theme.of(context).primaryColor,
-                      onPressed: _isLoading ? null : _handleSubmit,
+                      disabledColor: Colors.green.withOpacity(0.4),
+                      onPressed:
+                          _isLoading || !_formIsValid ? null : _handleSubmit,
                       child: Text(_isLoading ? 'Loging in.....' : 'Log In',
                           style:
                               TextStyle(color: Theme.of(context).accentColor)),

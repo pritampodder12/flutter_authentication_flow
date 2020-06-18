@@ -5,14 +5,18 @@ import '../../../mixins/validation_mixin.dart';
 class AuthInput extends StatefulWidget {
   final String type;
   final String label;
-  final String placeholder;
+  final String name;
+  final bool isLoading;
   final FocusNode focusNode;
   final FocusNode nextFocusNode;
+  final Map<String, String> data;
   AuthInput({
     @required this.type,
     @required this.label,
-    @required this.placeholder,
-    @required this.focusNode,
+    @required this.name,
+    @required this.data,
+    this.isLoading,
+    this.focusNode,
     this.nextFocusNode,
   });
 
@@ -33,6 +37,7 @@ class _AuthInputState extends State<AuthInput> with ValidationMixin {
           });
       },
       child: TextFormField(
+        enabled: widget.isLoading == null ? true : !widget.isLoading,
         cursorColor: Theme.of(context).primaryColor,
         keyboardType: widget.type == 'email'
             ? TextInputType.emailAddress
@@ -41,7 +46,6 @@ class _AuthInputState extends State<AuthInput> with ValidationMixin {
         decoration: InputDecoration(
             border: OutlineInputBorder(),
             helperText: '',
-            hintText: widget.placeholder,
             labelText: widget.label),
         validator: widget.type == 'email'
             ? emailValidator
@@ -54,6 +58,9 @@ class _AuthInputState extends State<AuthInput> with ValidationMixin {
         onFieldSubmitted: (_) => widget.nextFocusNode != null
             ? FocusScope.of(context).requestFocus(widget.nextFocusNode)
             : null,
+        onSaved: (value) {
+          widget.data[widget.name] = value;
+        },
       ),
     );
   }

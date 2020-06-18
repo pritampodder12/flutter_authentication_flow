@@ -23,9 +23,8 @@ class MyApp extends StatelessWidget {
       initialRoute: initialRoute,
       onGenerateRoute: mainRoutes,
       theme: ThemeData(
-        primaryColor: Colors.green,
         accentColor: Colors.white,
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.green,
         textTheme: GoogleFonts.nunitoTextTheme(
           Theme.of(context).textTheme,
         ),

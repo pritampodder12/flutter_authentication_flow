@@ -9,7 +9,7 @@ class AuthInput extends StatefulWidget {
   final bool isLoading;
   final FocusNode focusNode;
   final FocusNode nextFocusNode;
-  final Map<String, Map<String, dynamic>> data;
+  final Map<String, String> data;
   AuthInput({
     @required this.type,
     @required this.label,
@@ -24,32 +24,8 @@ class AuthInput extends StatefulWidget {
   _AuthInputState createState() => _AuthInputState();
 }
 
-class _AuthInputState extends State<AuthInput> {
+class _AuthInputState extends State<AuthInput> with ValidationMixin {
   bool _autoValidate = false;
-  bool _isValid;
-  String emailValidator(String value) {
-    if (value.isEmpty) return 'Email is required';
-    if (!value.contains('@'))
-      return 'Please enter valid email id';
-    else {
-      // setState(() {
-      //   _isValid = true;
-      // });
-      return null;
-    }
-  }
-
-  String passwordValidator(String value) {
-    if (value.isEmpty) return 'Password is required';
-    if (value.length < 3)
-      return 'Password must atleast 3 character';
-    else {
-      // setState(() {
-      //   _isValid = true;
-      // });
-      return null;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +59,7 @@ class _AuthInputState extends State<AuthInput> {
             ? FocusScope.of(context).requestFocus(widget.nextFocusNode)
             : null,
         onSaved: (value) {
-          widget.data[widget.name]['value'] = value;
-          widget.data[widget.name]['isValid'] = true;
+          widget.data[widget.name] = value;
         },
       ),
     );

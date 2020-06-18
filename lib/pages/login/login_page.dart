@@ -14,22 +14,17 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _passwordFocusNode = FocusNode();
   bool _autoValidate = false;
-  bool _isLoading = false;
-  final _formData = <String, Map<String, dynamic>>{
-    'email': {
-      ...{'value': ''},
-      ...{'isValid': false},
-    },
-    'password': {
-      ...{'value': ''},
-      ...{'isValid': false},
-    },
+  bool _isLoading = true;
+  final _formData = <String, String>{
+    'email': '',
+    'password': '',
   };
 
   _handleSubmit() async {
     if (_formKey.currentState.validate()) {
       FocusScope.of(context).unfocus();
       _formKey.currentState.save();
+      print(_formData);
       setState(() {
         _isLoading = true;
       });
@@ -46,8 +41,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    //formData.forEach((k, v) => print(v['value']));
-    print(_formData);
     return Scaffold(
         backgroundColor: Colors.lime[300],
         body: SafeArea(

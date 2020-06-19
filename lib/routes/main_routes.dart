@@ -8,6 +8,9 @@ Route<dynamic> mainRoutes(RouteSettings settings) {
     case RouterNames.LOGIN:
       return MaterialPageRoute(builder: (context) => LoginPage());
       break;
+    case RouterNames.SIGNUP:
+      return MaterialPageRoute(builder: (context) => SignUp());
+      break;
     case RouterNames.HOME:
       return MaterialPageRoute(builder: (context) => HomePage());
       break;

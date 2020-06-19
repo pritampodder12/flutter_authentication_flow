@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../mixins/validation_mixin.dart';
+import '../mixins/validation_mixin.dart';
 
 class AuthInput extends StatefulWidget {
   final String type;
@@ -34,9 +34,14 @@ class _AuthInputState extends State<AuthInput> with ValidationMixin {
     setState(() {
       _isValid = false;
     });
-    String result = widget.type == 'email'
+    String result = widget.name == 'email'
         ? emailValidator(value)
-        : widget.type == 'password' ? passwordValidator(value) : null;
+        : widget.name == 'password'
+            ? passwordValidator(value)
+            : widget.name == 'name'
+                ? nameValidator(value)
+                : widget.name == 'phone' ? phoneValidator(value) : null;
+
     setState(() {
       if (result == null) _isValid = true;
     });
@@ -52,29 +57,15 @@ class _AuthInputState extends State<AuthInput> with ValidationMixin {
           });
       },
       child: TextFormField(
-        onChanged: _checkValidity,
-        enabled: widget.isLoading == null ? true : !widget.isLoading,
-        cursorColor: Theme.of(context).primaryColor,
-        keyboardType: widget.type == 'email'
-            ? TextInputType.emailAddress
-            : TextInputType.text,
-        focusNode: widget.focusNode,
-        decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            helperText: '',
-            hintText: widget.placeholder,
-            labelText: widget.label),
-        validator: widget.type == 'email'
-            ? emailValidator
-            : widget.type == 'password' ? passwordValidator : null,
-        obscureText: widget.type == 'password' ? true : false,
         autovalidate: _autoValidate,
-        textInputAction: widget.nextFocusNode != null
-            ? TextInputAction.next
-            : TextInputAction.done,
-        onFieldSubmitted: (_) => widget.nextFocusNode != null
-            ? FocusScope.of(context).requestFocus(widget.nextFocusNode)
-            : null,
+        onChanged: _checkValidity,
+        validator: widget.name == 'email'
+            ? emailValidator
+            : widget.name == 'password'
+                ? passwordValidator
+                : widget.name == 'name'
+                    ? nameValidator
+                    : widget.name == 'phone' ? phoneValidator : null,
         onSaved: (value) {
           widget.data[widget.name]['value'] = value;
           if (_isValid)
@@ -82,6 +73,27 @@ class _AuthInputState extends State<AuthInput> with ValidationMixin {
           else
             widget.data[widget.name]['isValid'] = false;
         },
+        onFieldSubmitted: (_) => widget.nextFocusNode != null
+            ? FocusScope.of(context).requestFocus(widget.nextFocusNode)
+            : null,
+        focusNode: widget.focusNode,
+        enabled: widget.isLoading == null ? true : !widget.isLoading,
+        cursorColor: Theme.of(context).primaryColor,
+        obscureText: widget.type == 'password' ? true : false,
+        textInputAction: widget.nextFocusNode != null
+            ? TextInputAction.next
+            : TextInputAction.done,
+        keyboardType: widget.type == 'email'
+            ? TextInputType.emailAddress
+            : widget.type == 'number'
+                ? TextInputType.number
+                : TextInputType.text,
+        decoration: InputDecoration(
+            isDense: true,
+            border: OutlineInputBorder(),
+            helperText: '',
+            hintText: widget.placeholder,
+            labelText: widget.label),
       ),
     );
   }

@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import './components/social_media_icon.dart';
 import '../../common_widgets/authInput.dart';
 import '../../constants/index.dart';
 
-class LoginPage extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
+  final _phoneFocusNode = FocusNode();
+  final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
+
   final _formData = <String, Map<String, dynamic>>{
+    'name': {'value': '', 'isValid': false},
+    'phone': {'value': '', 'isValid': false},
     'email': {'value': '', 'isValid': false},
     'password': {'value': '', 'isValid': false},
   };
@@ -39,13 +42,10 @@ class _LoginPageState extends State<LoginPage> {
     });
     await Future.delayed(Duration(seconds: 2),
         () => Navigator.pushReplacementNamed(context, RouterNames.HOME));
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // prefs.setBool('loggedIn', true);
   }
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.lime[300],
         body: SafeArea(
@@ -64,8 +64,8 @@ class _LoginPageState extends State<LoginPage> {
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   children: [
-                    SizedBox(height: screenSize.height * 0.2),
-                    Text('Log In',
+                    SizedBox(height: 50),
+                    Text('Sign Up',
                         style: TextStyle(
                             fontSize: 30,
                             color: Theme.of(context).primaryColor)),
@@ -73,12 +73,34 @@ class _LoginPageState extends State<LoginPage> {
                         color: Theme.of(context).primaryColor, thickness: 1),
                     SizedBox(height: 40),
                     AuthInput(
+                      type: 'text',
+                      label: 'Name',
+                      name: 'name',
+                      placeholder: 'full name',
+                      isLoading: _isLoading,
+                      data: _formData,
+                      nextFocusNode: _phoneFocusNode,
+                    ),
+                    SizedBox(height: 20),
+                    AuthInput(
+                      type: 'number',
+                      label: 'Phone',
+                      name: 'phone',
+                      placeholder: 'Phone Number',
+                      isLoading: _isLoading,
+                      data: _formData,
+                      focusNode: _phoneFocusNode,
+                      nextFocusNode: _emailFocusNode,
+                    ),
+                    SizedBox(height: 20),
+                    AuthInput(
                       type: 'email',
                       label: 'Email',
                       name: 'email',
                       placeholder: 'e.g. company@example.com',
                       isLoading: _isLoading,
                       data: _formData,
+                      focusNode: _emailFocusNode,
                       nextFocusNode: _passwordFocusNode,
                     ),
                     SizedBox(height: 20),
@@ -97,24 +119,9 @@ class _LoginPageState extends State<LoginPage> {
                       disabledTextColor: Colors.white,
                       onPressed:
                           _isLoading || !_formIsValid ? null : _handleSubmit,
-                      child: Text(_isLoading ? 'Loging in.....' : 'Log In'),
+                      child: Text(_isLoading ? 'Signing up.....' : 'Sign Up'),
                     ),
                     SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SocialMediaIcon(iconName: ImageNames.googleLogo),
-                        SocialMediaIcon(iconName: ImageNames.facebookLogo)
-                      ],
-                    ),
-                    FlatButton(
-                      textColor: Colors.black,
-                      child: Text('Sign Up'),
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        Navigator.of(context).pushNamed(RouterNames.SIGNUP);
-                      },
-                    )
                   ],
                 ),
               ),

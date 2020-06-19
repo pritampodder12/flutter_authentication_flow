@@ -28,6 +28,11 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.nunitoTextTheme(
           Theme.of(context).textTheme,
         ),
+        buttonTheme: ButtonThemeData(
+          height: 40,
+          buttonColor: Colors.green,
+          disabledColor: Colors.green.withOpacity(0.4),
+        ),
       ),
       debugShowCheckedModeBanner: false,
     );

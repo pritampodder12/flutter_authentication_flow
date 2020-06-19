@@ -34,13 +34,11 @@ class _AuthInputState extends State<AuthInput> with ValidationMixin {
     setState(() {
       _isValid = false;
     });
-    String result = widget.name == 'email'
-        ? emailValidator(value)
-        : widget.name == 'password'
-            ? passwordValidator(value)
-            : widget.name == 'name'
-                ? nameValidator(value)
-                : widget.name == 'phone' ? phoneValidator(value) : null;
+    String result;
+    if (widget.name == 'name') result = nameValidator(value);
+    if (widget.name == 'phone') result = phoneValidator(value);
+    if (widget.name == 'email') result = emailValidator(value);
+    if (widget.name == 'password') result = passwordValidator(value);
 
     setState(() {
       if (result == null) _isValid = true;
@@ -68,10 +66,7 @@ class _AuthInputState extends State<AuthInput> with ValidationMixin {
                     : widget.name == 'phone' ? phoneValidator : null,
         onSaved: (value) {
           widget.data[widget.name]['value'] = value;
-          if (_isValid)
-            widget.data[widget.name]['isValid'] = true;
-          else
-            widget.data[widget.name]['isValid'] = false;
+          widget.data[widget.name]['isValid'] = _isValid;
         },
         onFieldSubmitted: (_) => widget.nextFocusNode != null
             ? FocusScope.of(context).requestFocus(widget.nextFocusNode)

@@ -13,7 +13,6 @@ class _SignUpState extends State<SignUp> {
   final _phoneFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
-
   final _formData = <String, Map<String, dynamic>>{
     'name': {'value': '', 'isValid': false},
     'phone': {'value': '', 'isValid': false},
@@ -36,7 +35,6 @@ class _SignUpState extends State<SignUp> {
 
   _handleSubmit() async {
     FocusScope.of(context).unfocus();
-    _formKey.currentState.save();
     setState(() {
       _isLoading = true;
     });

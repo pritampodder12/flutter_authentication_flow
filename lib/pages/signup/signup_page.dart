@@ -71,7 +71,7 @@ class _SignUpState extends State<SignUp> {
                         color: Theme.of(context).primaryColor, thickness: 1),
                     SizedBox(height: 40),
                     AuthInput(
-                      type: 'text',
+                      type: TextInputType.text,
                       label: 'Name',
                       name: 'name',
                       placeholder: 'full name',
@@ -81,7 +81,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     SizedBox(height: 20),
                     AuthInput(
-                      type: 'number',
+                      type: TextInputType.phone,
                       label: 'Phone',
                       name: 'phone',
                       placeholder: 'Phone Number',
@@ -92,7 +92,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     SizedBox(height: 20),
                     AuthInput(
-                      type: 'email',
+                      type: TextInputType.emailAddress,
                       label: 'Email',
                       name: 'email',
                       placeholder: 'e.g. company@example.com',
@@ -103,7 +103,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     SizedBox(height: 20),
                     AuthInput(
-                      type: 'password',
+                      type: TextInputType.text,
                       label: 'Password',
                       name: 'password',
                       placeholder: 'e.g. abc@123',

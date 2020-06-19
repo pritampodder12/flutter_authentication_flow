@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../mixins/validation_mixin.dart';
 
 class AuthInput extends StatefulWidget {
-  final String type;
+  final TextInputType type;
   final String label;
   final String name;
   final String placeholder;
@@ -74,15 +74,11 @@ class _AuthInputState extends State<AuthInput> with ValidationMixin {
         focusNode: widget.focusNode,
         enabled: widget.isLoading == null ? true : !widget.isLoading,
         cursorColor: Theme.of(context).primaryColor,
-        obscureText: widget.type == 'password' ? true : false,
+        obscureText: widget.name == 'password' ? true : false,
         textInputAction: widget.nextFocusNode != null
             ? TextInputAction.next
             : TextInputAction.done,
-        keyboardType: widget.type == 'email'
-            ? TextInputType.emailAddress
-            : widget.type == 'number'
-                ? TextInputType.number
-                : TextInputType.text,
+        keyboardType: widget.type,
         decoration: InputDecoration(
             isDense: true,
             border: OutlineInputBorder(),

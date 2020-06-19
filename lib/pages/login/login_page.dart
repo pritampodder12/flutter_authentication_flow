@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: Theme.of(context).primaryColor, thickness: 1),
                     SizedBox(height: 40),
                     AuthInput(
-                      type: 'email',
+                      type: TextInputType.emailAddress,
                       label: 'Email',
                       name: 'email',
                       placeholder: 'e.g. company@example.com',
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(height: 20),
                     AuthInput(
-                      type: 'password',
+                      type: TextInputType.text,
                       label: 'Password',
                       name: 'password',
                       placeholder: 'e.g. abc@123',

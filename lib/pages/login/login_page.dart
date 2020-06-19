@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import './components/social_media_icon.dart';
-import '../../common_widgets/authInput.dart';
+import '../../widgets/authInput.dart';
 import '../../constants/index.dart';
 
 class LoginPage extends StatefulWidget {

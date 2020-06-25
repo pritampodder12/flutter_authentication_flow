@@ -81,7 +81,6 @@ class _AuthInputState extends State<AuthInput> with ValidationMixin {
         keyboardType: widget.type,
         decoration: InputDecoration(
             isDense: true,
-            border: OutlineInputBorder(),
             helperText: '',
             hintText: widget.placeholder,
             labelText: widget.label),

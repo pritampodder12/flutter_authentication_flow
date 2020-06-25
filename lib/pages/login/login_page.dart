@@ -39,8 +39,8 @@ class _LoginPageState extends State<LoginPage> {
     });
     await Future.delayed(Duration(seconds: 2),
         () => Navigator.pushReplacementNamed(context, RouterNames.HOME));
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // prefs.setBool('loggedIn', true);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('loggedIn', true);
   }
 
   @override

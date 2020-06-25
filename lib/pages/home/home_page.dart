@@ -1,6 +1,8 @@
 import 'package:case_study/constants/image_names.dart';
 import 'package:case_study/constants/router_names.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   bool isPlaying = false;
+  int _currentIndex = 0;
 
   @override
   void initState() {
@@ -39,6 +42,28 @@ class _HomePageState extends State<HomePage>
             child: Text('Log Out'),
           )
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedFontSize: 12,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(MdiIcons.storefront), title: Text("Shop")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.offline_bolt), title: Text("SuperCoin")),
+          BottomNavigationBarItem(
+              icon: Icon(MdiIcons.sword), title: Text("Ideas")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.video_library), title: Text("Video")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.games), title: Text("Games")),
+        ],
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        onTap: (i) {
+          setState(() {
+            _currentIndex = i;
+          });
+        },
       ),
       body: Container(
         width: double.infinity,

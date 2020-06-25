@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import './constants/router_names.dart';
+import './constants/color_names.dart';
 import './routes/main_routes.dart';
 
 void main() async {
@@ -24,15 +25,15 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: mainRoutes,
       theme: ThemeData(
         accentColor: Colors.white,
-        primarySwatch: Colors.green,
+        primaryColor: ColorNames.primary,
         textTheme: GoogleFonts.nunitoTextTheme(
           Theme.of(context).textTheme,
         ),
         buttonTheme: ButtonThemeData(
-          height: 40,
-          buttonColor: Colors.green,
-          disabledColor: Colors.green.withOpacity(0.4),
-        ),
+            height: 40,
+            buttonColor: ColorNames.primary,
+            disabledColor: Colors.green.withOpacity(0.4),
+            textTheme: ButtonTextTheme.accent),
       ),
       debugShowCheckedModeBanner: false,
     );
